@@ -1,0 +1,95 @@
+class GroupListModel {
+  String? groupAvatarImage;
+  String? groupCoverImage;
+  String? groupCreatedBy;
+  int? groupCreatedById;
+  String? groupType;
+  int? id;
+  bool? isGroupAdmin;
+  bool? isGroupMember;
+  bool? isRequestSend;
+  String? memberCount;
+  List<Member>? memberList;
+  String? name;
+  String? postCount;
+
+  GroupListModel(
+      {this.groupAvatarImage,
+      this.groupCoverImage,
+      this.groupCreatedBy,
+      this.groupCreatedById,
+      this.groupType,
+      this.id,
+      this.isGroupAdmin,
+      this.isGroupMember,
+      this.isRequestSend,
+      this.memberCount,
+      this.memberList,
+      this.name,
+      this.postCount});
+
+  factory GroupListModel.fromJson(Map<String, dynamic> json) {
+    return GroupListModel(
+      groupAvatarImage: json['group_avtar_image'],
+      groupCoverImage: json['group_cover_image'],
+      groupCreatedBy: json['group_created_by'],
+      groupCreatedById: json['group_created_by_id'],
+      groupType: json['group_type'],
+      id: json['id'],
+      isGroupAdmin: json['is_group_admin'],
+      isGroupMember: json['is_group_member'],
+      isRequestSend: json['is_request_send'],
+      memberCount: json['member_count'],
+      memberList: json['member_list'] != null ? (json['member_list'] as List).map((i) => Member.fromJson(i)).toList() : null,
+      name: json['name'],
+      postCount: json['post_count'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['group_avtar_image'] = this.groupAvatarImage;
+    data['group_cover_image'] = this.groupCoverImage;
+    data['group_created_by'] = this.groupCreatedBy;
+    data['group_created_by_id'] = this.groupCreatedById;
+    data['group_type'] = this.groupType;
+    data['id'] = this.id;
+    data['is_group_admin'] = this.isGroupAdmin;
+    data['is_group_member'] = this.isGroupMember;
+    data['is_request_send'] = this.isRequestSend;
+    data['member_count'] = this.memberCount;
+    data['name'] = this.name;
+    data['post_count'] = this.postCount;
+    if (this.memberList != null) {
+      data['member_list'] = this.memberList!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Member {
+  bool? isAdmin;
+  String? userAvatar;
+  int? userId;
+  String? userName;
+
+  Member({this.isAdmin, this.userAvatar, this.userId, this.userName});
+
+  factory Member.fromJson(Map<String, dynamic> json) {
+    return Member(
+      isAdmin: json['is_admin'],
+      userAvatar: json['user_avatar'],
+      userId: json['user_id'],
+      userName: json['user_name'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['is_admin'] = this.isAdmin;
+    data['user_avatar'] = this.userAvatar;
+    data['user_id'] = this.userId;
+    data['user_name'] = this.userName;
+    return data;
+  }
+}
