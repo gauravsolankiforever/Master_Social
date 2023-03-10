@@ -275,133 +275,133 @@ class _CourseScreenWidgetState extends State<_CourseScreenWidget> with TickerPro
                         collapseMode: CollapseMode.parallax,
                         background: Container(
                             child: Stack(
-                          children: <Widget>[
-                            Stack(
                               children: <Widget>[
-                                Hero(
-                                  tag: widget.coursesBean.images?.small as Object,
-                                  child: FadeInImage.memoryNetwork(
-                                    image: widget.coursesBean.images!.small!,
-                                    fit: BoxFit.cover,
-                                    width: MediaQuery.of(context).size.width,
-                                    height: MediaQuery.of(context).size.height / kef,
-                                    placeholder: kTransparentImage,
+                                Stack(
+                                  children: <Widget>[
+                                    Hero(
+                                      tag: widget.coursesBean.images?.small as Object,
+                                      child: FadeInImage.memoryNetwork(
+                                        image: widget.coursesBean.images!.small!,
+                                        fit: BoxFit.cover,
+                                        width: MediaQuery.of(context).size.width,
+                                        height: MediaQuery.of(context).size.height / kef,
+                                        placeholder: kTransparentImage,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                FadeTransition(
+                                  opacity: _fadeInFadeOut,
+                                  child: Container(
+                                    decoration: BoxDecoration(color: mainColor?.withOpacity(0.5)),
                                   ),
                                 ),
-                              ],
-                            ),
-                            FadeTransition(
-                              opacity: _fadeInFadeOut,
-                              child: Container(
-                                decoration: BoxDecoration(color: mainColor?.withOpacity(0.5)),
-                              ),
-                            ),
-                            FadeTransition(
-                              opacity: _fadeInFadeOut,
-                              child: Container(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 20, right: 20),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 0.0),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: <Widget>[
-                                            Row(
-                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                FadeTransition(
+                                  opacity: _fadeInFadeOut,
+                                  child: Container(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 20, right: 20),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 0.0),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: <Widget>[
+                                                Row(
+                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                  children: <Widget>[
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        Navigator.pushNamed(
+                                                          context,
+                                                          CategoryDetailScreen.routeName,
+                                                          arguments: CategoryDetailScreenArgs(widget.coursesBean.categories_object[0]),
+                                                        );
+                                                      },
+                                                      child: Text(
+                                                        unescape.convert(categories),
+                                                        textScaleFactor: 1.0,
+                                                        style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 16),
+                                                      ),
+                                                    ),
+                                                    Icon(
+                                                      Icons.keyboard_arrow_right,
+                                                      color: Colors.white.withOpacity(0.5),
+                                                    )
+                                                  ],
+                                                ),
                                                 GestureDetector(
                                                   onTap: () {
-                                                    Navigator.pushNamed(
-                                                      context,
-                                                      CategoryDetailScreen.routeName,
-                                                      arguments: CategoryDetailScreenArgs(widget.coursesBean.categories_object[0]),
+                                                    showDialog(
+                                                      context: context,
+                                                      barrierDismissible: false,
+                                                      builder: (BuildContext context) => DialogAuthorWidget(state),
                                                     );
                                                   },
-                                                  child: Text(
-                                                    unescape.convert(categories!),
-                                                    textScaleFactor: 1.0,
-                                                    style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 16),
+                                                  child: CircleAvatar(
+                                                    backgroundImage: NetworkImage(
+                                                      (state is LoadedCourseState)
+                                                          ? state.courseDetailResponse.author?.avatar_url ??
+                                                          'https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png'
+                                                          : 'https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png',
+                                                    ),
                                                   ),
-                                                ),
-                                                Icon(
-                                                  Icons.keyboard_arrow_right,
-                                                  color: Colors.white.withOpacity(0.5),
                                                 )
                                               ],
                                             ),
-                                            GestureDetector(
-                                              onTap: () {
-                                                showDialog(
-                                                  context: context,
-                                                  barrierDismissible: false,
-                                                  builder: (BuildContext context) => DialogAuthorWidget(state),
-                                                );
-                                              },
-                                              child: CircleAvatar(
-                                                backgroundImage: NetworkImage(
-                                                  (state is LoadedCourseState)
-                                                      ? state.courseDetailResponse.author?.avatar_url ??
-                                                          'https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png'
-                                                      : 'https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png',
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 8.0),
-                                        child: Container(
-                                          height: 140,
-                                          child: Text(
-                                            unescape.convert(widget.coursesBean.title!!!),
-                                            textScaleFactor: 1.0,
-                                            style: TextStyle(color: Colors.white, fontSize: 40),
                                           ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 32.0, right: 16.0),
-                                        child: Row(
-                                          children: <Widget>[
-                                            RatingBar(
-                                              initialRating: ratingAverage,
-                                              minRating: 0,
-                                              allowHalfRating: true,
-                                              direction: Axis.horizontal,
-                                              tapOnlyMode: true,
-                                              glow: false,
-                                              ignoreGestures: true,
-                                              itemCount: 5,
-                                              itemSize: 19,
-                                              itemBuilder: (context, _) => Icon(
-                                                Icons.star,
-                                                color: Colors.amber,
-                                              ),
-                                              onRatingUpdate: (rating) {},
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(left: 8.0),
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 8.0),
+                                            child: Container(
+                                              height: 140,
                                               child: Text(
-                                                "${ratingAverage?.toDouble()} (${ratingTotal} review)",
+                                                unescape.convert(widget.coursesBean.title),
                                                 textScaleFactor: 1.0,
-                                                style: TextStyle(fontSize: 16, color: Colors.white.withOpacity(0.5)),
+                                                style: TextStyle(color: Colors.white, fontSize: 40),
                                               ),
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 32.0, right: 16.0),
+                                            child: Row(
+                                              children: <Widget>[
+                                                RatingBar(
+                                                  initialRating: ratingAverage,
+                                                  minRating: 0,
+                                                  allowHalfRating: true,
+                                                  direction: Axis.horizontal,
+                                                  tapOnlyMode: true,
+                                                  glow: false,
+                                                  ignoreGestures: true,
+                                                  itemCount: 5,
+                                                  itemSize: 19,
+                                                  itemBuilder: (context, _) => Icon(
+                                                    Icons.star,
+                                                    color: Colors.amber,
+                                                  ),
+                                                  onRatingUpdate: (rating) {},
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(left: 8.0),
+                                                  child: Text(
+                                                    "${ratingAverage?.toDouble()} (${ratingTotal} review)",
+                                                    textScaleFactor: 1.0,
+                                                    style: TextStyle(fontSize: 16, color: Colors.white.withOpacity(0.5)),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ),
-                            )
-                          ],
-                        )),
+                                )
+                              ],
+                            )),
                       ),
                     )
                   ];
@@ -510,117 +510,120 @@ class _CourseScreenWidgetState extends State<_CourseScreenWidget> with TickerPro
             //Price Course
             _buildPrice(state),
             //Button "Get Now"
-            MaterialButton(
-              height: 40,
-              color: mainColor,
-              onPressed: () async {
-                if (state is LoadedCourseState) {
-                  if (_bloc.selectedPaymetId == -1) {
-                    setState(() {
-                      isLoading = true;
-                    });
+            Container(
+              width: MediaQuery.of(context).size.width*0.2,
+              child: MaterialButton(
+                height: 40,
+                color: mainColor,
+                onPressed: () async {
+                  if (state is LoadedCourseState) {
+                    if (_bloc.selectedPaymetId == -1) {
+                      setState(() {
+                        isLoading = true;
+                      });
 
-                    //GetTokenToBuyCourse
-                    Response response = await dio.post(apiEndpoint + 'get_auth_token_to_course', data: {'course_id': widget.coursesBean.id});
+                      //GetTokenToBuyCourse
+                      Response response = await dio.post(apiEndpoint + 'get_auth_token_to_course', data: {'course_id': widget.coursesBean.id});
 
-                    setState(() {
-                      isLoading = false;
-                    });
-                    showModalBottomSheet<void>(
-                      context: context,
-                      isScrollControlled: true,
-                      barrierColor: Colors.black.withAlpha(1),
-                      backgroundColor: Colors.transparent,
-                      builder: (BuildContext context) {
-                        return Container(
-                          height: double.infinity,
-                          child: Stack(
-                            children: <Widget>[
-                              Container(
-                                height: double.infinity,
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.8),
-                                      offset: Offset(0, 3), // changes position of shadow
-                                    ),
-                                  ],
+                      setState(() {
+                        isLoading = false;
+                      });
+                      showModalBottomSheet<void>(
+                        context: context,
+                        isScrollControlled: true,
+                        barrierColor: Colors.black.withAlpha(1),
+                        backgroundColor: Colors.transparent,
+                        builder: (BuildContext context) {
+                          return Container(
+                            height: double.infinity,
+                            child: Stack(
+                              children: <Widget>[
+                                Container(
+                                  height: double.infinity,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.8),
+                                        offset: Offset(0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 25.0),
-                                child: Align(
-                                  alignment: Alignment.topLeft,
-                                  child: IconButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    icon: Icon(
-                                      Icons.close,
-                                      color: Colors.white,
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 25.0),
+                                  child: Align(
+                                    alignment: Alignment.topLeft,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      icon: Icon(
+                                        Icons.close,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              Container(
-                                margin: const EdgeInsets.only(left: 25, right: 25),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Material(
-                                      color: Colors.transparent,
-                                      child: Center(
-                                        child: Text(
-                                          "This app doesn't support the In App Purchase\nPlease visit the website to continue",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 30),
-                                    Material(
-                                      color: Colors.transparent,
-                                      child: SizedBox(
-                                        height: 45,
-                                        width: double.infinity,
-                                        child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            primary: mainColor,
-                                          ),
-                                          onPressed: () async {
-                                            _bloc.add(FetchEvent(widget.coursesBean.id!));
-                                            await launch('${response.data['token_auth']}&payment=pay').then((value) {
-                                              Navigator.of(context).pop();
-                                            });
-                                          },
+                                Container(
+                                  margin: const EdgeInsets.only(left: 25, right: 25),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Material(
+                                        color: Colors.transparent,
+                                        child: Center(
                                           child: Text(
-                                            'Continue',
+                                            "This app doesn't support the In App Purchase\nPlease visit the website to continue",
+                                            textAlign: TextAlign.center,
                                             style: TextStyle(
-                                              fontSize: 12,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 16,
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                  } else {
-                    _bloc.add(UsePlan(state.courseDetailResponse.id));
+                                      const SizedBox(height: 30),
+                                      Material(
+                                        color: Colors.transparent,
+                                        child: SizedBox(
+                                          height: 45,
+                                          width: double.infinity,
+                                          child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              primary: mainColor,
+                                            ),
+                                            onPressed: () async {
+                                              _bloc.add(FetchEvent(widget.coursesBean.id!));
+                                              await launch('${response.data['token_auth']}&payment=pay').then((value) {
+                                                Navigator.of(context).pop();
+                                              });
+                                            },
+                                            child: Text(
+                                              'Continue',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    } else {
+                      _bloc.add(UsePlan(state.courseDetailResponse.id));
+                    }
                   }
-                }
-              },
-              child: setUpButtonChild(state, isLoading),
+                },
+                child: setUpButtonChild(state, isLoading),
+              ),
             )
           ],
         ),

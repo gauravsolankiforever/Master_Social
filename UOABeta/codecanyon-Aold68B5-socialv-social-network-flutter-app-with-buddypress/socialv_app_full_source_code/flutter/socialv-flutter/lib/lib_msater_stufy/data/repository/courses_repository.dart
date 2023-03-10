@@ -87,6 +87,7 @@ class CoursesRepositoryImpl extends CoursesRepository {
     return _apiProvider.deleteFavoriteCourse(courseId);
   }
 
+
   @override
   Future<CourseDetailResponse> getCourse(int courseId) {
     log(_apiProvider.getCourse(courseId).toString());

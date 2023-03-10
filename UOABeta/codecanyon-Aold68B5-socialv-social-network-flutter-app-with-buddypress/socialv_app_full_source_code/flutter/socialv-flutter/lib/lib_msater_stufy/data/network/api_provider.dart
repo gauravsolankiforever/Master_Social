@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
@@ -27,6 +28,7 @@ import '../models/purchase/AllPlansResponse.dart';
 import '../models/purchase/UserPlansResponse.dart';
 import '../models/user_course.dart';
 import '../utils.dart';
+import 'package:http/http.dart' as http;
 
 @provide
 @singleton
@@ -121,9 +123,10 @@ class UserApiProvider {
     if (accountId != null) params = {"id": accountId};
     Response response = await dio.get(apiEndpoint + "account/",
         queryParameters: params,
-        options: Options(
-          headers: {"requirestoken": "true"},
-        ));
+        // options: Options(
+        //   headers: {"requirestoken": "true"},
+        // )
+    );
     return Account.fromJson(response.data);
   }
 
@@ -176,19 +179,22 @@ class UserApiProvider {
 
   //getCourse
   Future<CourseDetailResponse> getCourse(int id) async {
-    Response response = await dio.get(
-      apiEndpoint + "course",
-      queryParameters: {"id": id},
-      options: Options(
-        headers: {"requirestoken": "true"},
-      ),
-    );
+    http.Response response = await  http.get(Uri.parse((apiEndpoint + "course"+"?id=$id")));
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>>"+response.body);
+    // Response response1 = await dio.get(
+    //   apiEndpoint + "course",
+    //   queryParameters: {"id": id},
+    //   options: Options(
+    //     headers: {"requirestoken": "true"},
+    //   ),
+    // );
 
-    return CourseDetailResponse.fromJson(response.data);
+    return CourseDetailResponse.fromJson(json.decode(response.body));
   }
 
   //getReviews
   Future<ReviewResponse> getReviews(int id) async {
+
     Response response = await _dio.get(
       apiEndpoint + "course_reviews",
       queryParameters: {"id": id},
@@ -374,16 +380,19 @@ class UserApiProvider {
 
   //getUserPlans
   Future<UserPlansResponse?> getUserPlans(int courseId) async {
-    Response response = await dio.post(apiEndpoint + "user_plans",
-        data: {'course_id': courseId},
-        options: Options(
-          headers: {"requirestoken": "true"},
-        ));
 
-    if(response.data.isEmpty) {
+    http.Response response = await  http.get(Uri.parse((apiEndpoint + "user_plans"+"?id=$courseId")));
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>>"+response.body);
+    // Response response = await dio.post(apiEndpoint + "user_plans",
+    //     data: {'course_id': courseId},
+    //     options: Options(
+    //       headers: {"requirestoken": "true"},
+    //     ));
+
+    if(response.body.isEmpty) {
       return null;
     }else {
-      return UserPlansResponse.fromJson(response.data);
+      return UserPlansResponse.fromJson(json.decode(response.body));
     }
   }
 

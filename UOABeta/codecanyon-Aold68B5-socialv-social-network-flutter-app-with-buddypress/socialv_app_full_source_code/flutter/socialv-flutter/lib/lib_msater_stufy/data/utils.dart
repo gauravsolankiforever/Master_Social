@@ -34,5 +34,6 @@ Directory? appDocDir;
 
 ///URL
 //const BASE_URL = "https://masterstudy.stylemixthemes.com/academy";
-const BASE_URL = "https://ntf.codingserver.com/masterstudy";
+const BASE_URL = "https://ntf.codingserver.com/demo";
+// const BASE_URL = "https://ntf.codingserver.com/masterstudy";
 const String apiEndpoint = BASE_URL + "/wp-json/ms_lms/v2/";
