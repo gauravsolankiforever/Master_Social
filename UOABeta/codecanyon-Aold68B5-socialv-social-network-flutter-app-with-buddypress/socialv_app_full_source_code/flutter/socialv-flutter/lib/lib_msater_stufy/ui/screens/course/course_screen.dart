@@ -25,6 +25,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../main2.dart';
 import '../purchase_dialog/purchase_dialog.dart';
 import 'tabs/faq_widget.dart';
+import 'package:http/http.dart' as http;
+
 
 class CourseScreenArgs {
   int? id;
@@ -128,7 +130,7 @@ class _CourseScreenWidgetState extends State<_CourseScreenWidget> with TickerPro
         }
       });
 
-    getToken();
+   getToken();
 
     _bloc = BlocProvider.of<CourseBloc>(context)..add(FetchEvent(widget.coursesBean.id!));
   }
@@ -136,7 +138,15 @@ class _CourseScreenWidgetState extends State<_CourseScreenWidget> with TickerPro
   String courseToken = '';
 
   Future getToken() async {
-    Response response = await dio.post(apiEndpoint + 'get_auth_token_to_course', data: {'course_id': widget.coursesBean.id});
+    var map = new Map<String, dynamic>();
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>> getToken 1"+(apiEndpoint + 'get_auth_token_to_course'));
+
+
+
+
+    Response response = await dio.post(apiEndpoint + 'get_auth_token_to_course',
+        data: {'course_id': widget.coursesBean.id});
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>> getToken 3"+response.statusCode.toString());
 
     courseToken = response.data['token_auth'];
   }
@@ -460,6 +470,10 @@ class _CourseScreenWidgetState extends State<_CourseScreenWidget> with TickerPro
 
   _buildBottom(CourseState state) {
     ///Button is "Start Course" if has_access == true
+    (state is LoadedCourseState && state.courseDetailResponse.has_access)?
+    print("_buildBottom>>>>>>>>>>>>>>>>>>>>>>>>>.1"+(state is LoadedCourseState).toString()):
+        print("_buildBottom>>>>>>>>>>>>>>>>>>>>>>>>>.2");
+
     if (state is LoadedCourseState && state.courseDetailResponse.has_access) {
       return Container(
         decoration: BoxDecoration(

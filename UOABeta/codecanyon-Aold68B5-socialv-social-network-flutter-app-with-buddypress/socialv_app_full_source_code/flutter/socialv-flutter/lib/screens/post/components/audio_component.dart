@@ -55,9 +55,11 @@ class _AudioPostComponentState extends State<AudioPostComponent> with WidgetsBin
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+
     if (state == AppLifecycleState.paused) {
-      _player.stop();
+       _player.stop();
     }
+
   }
 
   Stream<PositionData> get _positionDataStream => Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(

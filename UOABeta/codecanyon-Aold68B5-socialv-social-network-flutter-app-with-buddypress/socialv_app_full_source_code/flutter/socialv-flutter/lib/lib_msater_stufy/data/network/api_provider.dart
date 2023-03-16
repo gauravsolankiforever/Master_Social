@@ -180,7 +180,7 @@ class UserApiProvider {
   //getCourse
   Future<CourseDetailResponse> getCourse(int id) async {
     http.Response response = await  http.get(Uri.parse((apiEndpoint + "course"+"?id=$id")));
-    print(">>>>>>>>>>>>>>>>>>>>>>>>>>"+response.body);
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>> 1 "+response.body);
     // Response response1 = await dio.get(
     //   apiEndpoint + "course",
     //   queryParameters: {"id": id},
@@ -382,7 +382,7 @@ class UserApiProvider {
   Future<UserPlansResponse?> getUserPlans(int courseId) async {
 
     http.Response response = await  http.get(Uri.parse((apiEndpoint + "user_plans"+"?id=$courseId")));
-    print(">>>>>>>>>>>>>>>>>>>>>>>>>>"+response.body);
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>> 2"+response.body);
     // Response response = await dio.post(apiEndpoint + "user_plans",
     //     data: {'course_id': courseId},
     //     options: Options(

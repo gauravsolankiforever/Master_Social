@@ -6,11 +6,12 @@ import 'package:meta/meta.dart';
 @immutable
 abstract class CourseState {}
 
-class InitialCourseState extends CourseState {}
+class InitialCourseState extends CourseState {
+
+}
 
 class OpenPurchaseState extends CourseState {
   final String url;
-
   OpenPurchaseState(this.url);
 }
 
